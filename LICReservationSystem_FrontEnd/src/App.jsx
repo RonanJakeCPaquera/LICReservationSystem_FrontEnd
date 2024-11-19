@@ -1,21 +1,21 @@
-// App.jsx
-
+// src/App.jsx
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import CustomAppBar from './components/AppBar';
+import Reservation from './components/Reservation'; // Import the Reservation component
 
 function App() {
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <CustomAppBar />
-      <Box component="main" sx={{ p: 3 }}>
-        <Toolbar />
+    <Router>
+      <Box>
+        <CustomAppBar />
+        <Routes>
+          <Route path="/reservation" element={<Reservation />} />
+          {/* Add other routes here */}
+        </Routes>
       </Box>
-    </Box>
+    </Router>
   );
 }
 
