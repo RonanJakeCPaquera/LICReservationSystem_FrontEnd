@@ -130,7 +130,7 @@ export default function SignIn() {
               color: 'maroon',
             }}
           >
-            STUDENT INFORMATION MANAGEMENT SYSTEM
+            LIC Reservation System
           </Typography>
 
           {/* Registration Type Selection */}
