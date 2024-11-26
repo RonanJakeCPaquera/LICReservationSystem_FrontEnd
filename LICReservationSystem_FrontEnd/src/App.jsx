@@ -19,6 +19,7 @@ function App() {
           <Route path="/student-register" element={<StudentRegister />} /> {/* StudentRegister route */}
           <Route path="/admin-register" element={<AdminRegister />} />
           <Route path="/login-page" element={<LoginPage />} />
+          <Route patj="/reservation" element={<Reservation />} />
         </Routes>
       </Box>
     </Router>

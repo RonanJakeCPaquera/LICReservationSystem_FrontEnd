@@ -128,6 +128,7 @@ function LoginPage() {
           variant="contained" 
           color="primary" 
           fullWidth
+          onClick={() => navigate('/reservation')} 
           sx={{
             background: 'maroon',
             fontSize: 15,
