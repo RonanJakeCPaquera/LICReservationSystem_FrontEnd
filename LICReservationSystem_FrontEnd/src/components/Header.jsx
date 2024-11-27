@@ -8,7 +8,7 @@ const HeaderContainer = styled(Box)(() => ({
   alignItems: 'center',
   backgroundColor: '#800000', // Maroon color
   color: 'white', // White text
-  padding: '10px 20px',
+  padding: '10px 20px', // Maintain consistent padding for the header container
   boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
   width: '100%',
 }));
@@ -17,12 +17,14 @@ const LeftSection = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
   gap: '16px',
+  paddingLeft: '10px', // Add space on the left
 }));
 
 const RightSection = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
   gap: '10px',
+  paddingRight: '10px', // Add space on the right
 }));
 
 const Logo = styled('img')(() => ({
@@ -44,11 +46,11 @@ function Header({ name, onLogout }) {
           <Typography variant="h6" style={{ fontWeight: 'bold', lineHeight: 1 }}>
             CEBU INSTITUTE OF TECHNOLOGY UNIVERSITY
           </Typography>
-          <Typography variant="body2" style={{ lineHeight: 1 }}>
-            STUDENT INFORMATION SYSTEM
+          <Typography variant="body2" style={{ lineHeight: 1.5, fontSize: '15px', color: 'gold' }}>
+            Student Information System
           </Typography>
-          <Typography variant="body2" style={{ lineHeight: 1 }}>
-            LIC RESERVATION
+          <Typography variant="body2" style={{ lineHeight: 1.5, fontSize: '15px', color: 'gold' }}>
+            LIC Reservation System
           </Typography>
         </HeaderText>
       </LeftSection>

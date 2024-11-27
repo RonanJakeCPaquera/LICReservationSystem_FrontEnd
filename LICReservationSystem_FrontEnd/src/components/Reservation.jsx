@@ -9,23 +9,39 @@ import {
   TableHead, 
   TableRow, 
   TableCell, 
-  TableBody 
+  TableBody, 
+  MenuItem, 
+  Select, 
+  InputLabel, 
+  FormControl 
 } from '@mui/material';
-import { styled } from '@mui/system';
+import { styled, createGlobalStyle } from 'styled-components';
 import Header from './Header'; // Import your Header component
+
+// Global CSS Reset
+const GlobalStyle = createGlobalStyle`
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    overflow-x: hidden; /* Prevent horizontal scroll on body */
+  }
+`;
 
 // Styled components
 const PageContainer = styled(Box)(() => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  // Removed justifyContent: 'center' to avoid pushing content
-  minHeight: '100vh', // Full height
-  width: '100vw', // Full width
-  backgroundColor: '#f4f4f4', // Light gray background
-  overflowX: 'hidden', // Prevent horizontal scrolling if content overflows
+  minHeight: '100vh',
+  width: '100vw',
+  backgroundColor: '#f2dbb2',
+  overflowX: 'hidden', // Prevent horizontal scroll
   margin: 0,
-  paddingBottom: '20px'
+  paddingBottom: 20,
 }));
 
 const ContentWrapper = styled(Box)(() => ({
@@ -42,25 +58,60 @@ const ProfileCard = styled(Card)(() => ({
   flexDirection: 'column',
   gap: '16px',
   marginTop: '20px',
+  borderRadius: '12px !important', // Ensure borderRadius is applied
+  backgroundColor: '#ffffff', // Ensure a contrasting card color
+  boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.15)', // Visible shadow for standby
+  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+  '&:hover': {
+    transform: 'translateY(-8px)',
+    boxShadow: '0px 15px 30px rgba(0, 0, 0, 0.25)', // Stronger shadow on hover
+  },
 }));
 
 const AboutCard = styled(Card)(() => ({
   width: '45%',
   padding: '20px',
   marginTop: '20px',
+  borderRadius: '12px !important',
+  backgroundColor: '#ffffff', // Ensure a contrasting card color
+  boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.15)',
+  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+  '&:hover': {
+    transform: 'translateY(-8px)',
+    boxShadow: '0px 15px 30px rgba(0, 0, 0, 0.25)',
+  },
 }));
 
 const ReservationFormCard = styled(Card)(() => ({
   marginTop: '20px',
   padding: '20px',
-  width: '40%', // Make the card span full width
+  width: '40%',
+  borderRadius: '12px !important',
+  backgroundColor: '#ffffff',
+  boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.15)',
+  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+  '&:hover': {
+    transform: 'translateY(-8px)',
+    boxShadow: '0px 15px 30px rgba(0, 0, 0, 0.25)',
+  },
 }));
 
 const ReservationDetailsCard = styled(Card)(() => ({
   marginTop: '20px',
   padding: '20px',
   width: '90%',
+  maxWidth: '1200px',
+  overflowX: 'auto',
+  borderRadius: '12px !important',
+  backgroundColor: '#ffffff',
+  boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.15)',
+  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+  '&:hover': {
+    transform: 'translateY(-8px)',
+    boxShadow: '0px 15px 30px rgba(0, 0, 0, 0.25)',
+  },
 }));
+
 
 const ReservationTable = styled(Table)(() => ({
   minWidth: '100%',
@@ -72,12 +123,10 @@ function Profile() {
   const [contactNumber, setContactNumber] = useState('09123456789');
   const [address, setAddress] = useState('1234 Elm Street');
 
-  // Toggle edit mode
   const handleEditProfile = () => {
     setIsEditing(true);
   };
 
-  // Save changes (update values and exit edit mode)
   const handleSaveChanges = () => {
     setIsEditing(false);
     console.log('Changes saved:', { contactNumber, address });
@@ -86,8 +135,6 @@ function Profile() {
   return (
     <ProfileCard>
       <Typography variant="h6" fontWeight="bold">{isEditing ? 'EDIT PROFILE' : 'Student Profile'}</Typography>
-
-      {/* Editable fields for contact number and address */}
       {isEditing ? (
         <>
           <TextField
@@ -129,7 +176,6 @@ function Profile() {
 
 // Reservation Component
 function Reservation() {
-  // State for reservation data and form
   const [reservationData, setReservationData] = useState([
     {
       resource: 'Library Room A',
@@ -145,7 +191,7 @@ function Reservation() {
 
   const [newReservation, setNewReservation] = useState({
     resource: '',
-    name: '',
+    name: 'John Doe',  // Automatically input the name of the user
     date: '',
     timeIn: '',
     timeOut: '',
@@ -154,7 +200,6 @@ function Reservation() {
     penalty: 'None',
   });
 
-  // Function to handle adding a new reservation
   const handleMakeReservation = () => {
     if (
       !newReservation.resource ||
@@ -170,7 +215,7 @@ function Reservation() {
     setReservationData([...reservationData, newReservation]);
     setNewReservation({
       resource: '',
-      name: '',
+      name: 'John Doe',  // Automatically input the name of the user
       date: '',
       timeIn: '',
       timeOut: '',
@@ -181,114 +226,107 @@ function Reservation() {
   };
 
   return (
-    <PageContainer>
-      {/* Include Header Component */}
-      <Header />
-      {/* Content Wrapper */}
-      <ContentWrapper>
-        {/* Profile Card */}
-        <Profile />
+    <>
+      <GlobalStyle />
+      <PageContainer>
+        <Header />
+        <ContentWrapper>
+          <Profile />
+          <AboutCard>
+            <Typography variant="h6" fontWeight="bold">About the Page</Typography>
+            <Typography>
+              Welcome to the Student Dashboard! Here, you can manage your profile and
+              view your reservations. Ensure that all your details are updated for
+              accurate communication and service.
+            </Typography>
+          </AboutCard>
+        </ContentWrapper>
 
-        {/* About Card */}
-        <AboutCard>
-          <Typography variant="h6" fontWeight="bold">About the Page</Typography>
-          <Typography>
-            Welcome to the Student Dashboard! Here, you can manage your profile and
-            view your reservations. Ensure that all your details are updated for
-            accurate communication and service.
-          </Typography>
-        </AboutCard>
-      </ContentWrapper>
+        <ReservationFormCard>
+          <Typography variant="h6" fontWeight="bold" marginBottom="10px">Make a New Reservation</Typography>
 
-      {/* Reservation Section */}
-      <ReservationFormCard>
-        <Typography variant="h6" fontWeight="bold" marginBottom="10px">Make a New Reservation</Typography>
-        {/* Reservation Form */}
-        <TextField
-          label="Resource"
-          value={newReservation.resource}
-          onChange={(e) => setNewReservation({ ...newReservation, resource: e.target.value })}
-          fullWidth
-        />
-        <TextField
-          label="Name"
-          value={newReservation.name}
-          onChange={(e) => setNewReservation({ ...newReservation, name: e.target.value })}
-          fullWidth
-        />
-        <TextField
-          label="Date"
-          type="date"
-          value={newReservation.date}
-          onChange={(e) => setNewReservation({ ...newReservation, date: e.target.value })}
-          fullWidth
-        />
-        <TextField
-          label="Time In"
-          type="time"
-          value={newReservation.timeIn}
-          onChange={(e) => setNewReservation({ ...newReservation, timeIn: e.target.value })}
-          fullWidth
-        />
-        <TextField
-          label="Time Out"
-          type="time"
-          value={newReservation.timeOut}
-          onChange={(e) => setNewReservation({ ...newReservation, timeOut: e.target.value })}
-          fullWidth
-        />
-        <Button variant="contained" color="primary" onClick={handleMakeReservation}>
-          Submit Reservation
-        </Button>
-      </ReservationFormCard>
+          {/* Name Field */}
+          <TextField
+            label="Name"
+            value={newReservation.name}
+            onChange={(e) => setNewReservation({ ...newReservation, name: e.target.value })}
+            fullWidth
+          />
 
-      {/* Reservation Details */}
-      <ReservationDetailsCard>
-        <Typography variant="h6" fontWeight="bold" marginBottom="10px">Reservation Details</Typography>
-        <ReservationTable>
-          <TableHead>
-            <TableRow>
-              <TableCell>RESOURCES</TableCell>
-              <TableCell>NAME</TableCell>
-              <TableCell>DATE</TableCell>
-              <TableCell>TIME IN</TableCell>
-              <TableCell>TIME OUT</TableCell>
-              <TableCell>PAYMENT STATUS</TableCell>
-              <TableCell>CANCEL</TableCell>
-              <TableCell>STATUS</TableCell>
-              <TableCell>PENALTY</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {reservationData.map((row, index) => (
-              <TableRow key={index}>
-                <TableCell>{row.resource}</TableCell>
-                <TableCell>{row.name}</TableCell>
-                <TableCell>{row.date}</TableCell>
-                <TableCell>{row.timeIn}</TableCell>
-                <TableCell>{row.timeOut}</TableCell>
-                <TableCell>{row.paymentStatus}</TableCell>
-                <TableCell>
-                  <Button
-                    variant="outlined"
-                    color="error"
-                    size="small"
-                    onClick={() => {
-                      // Handle cancellation
-                      setReservationData(reservationData.filter((_, i) => i !== index));
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                </TableCell>
-                <TableCell>{row.status}</TableCell>
-                <TableCell>{row.penalty}</TableCell>
+          {/* Resource Dropdown */}
+          <FormControl fullWidth margin="normal">
+            <InputLabel>Resource</InputLabel>
+            <Select
+              value={newReservation.resource}
+              onChange={(e) => setNewReservation({ ...newReservation, resource: e.target.value })}
+            >
+              <MenuItem value="COM LAB">COM LAB</MenuItem>
+              <MenuItem value="DRIVING SIMULATOR">DRIVING SIMULATOR</MenuItem>
+              <MenuItem value="DISCUSSION ROOM">DISCUSSION ROOM</MenuItem>
+            </Select>
+          </FormControl>
+
+          {/* Date Field */}
+          <TextField
+            label="Date"
+            type="date"
+            value={newReservation.date}
+            onChange={(e) => setNewReservation({ ...newReservation, date: e.target.value })}
+            fullWidth
+          />
+          <TextField
+            label="Time In"
+            type="time"
+            value={newReservation.timeIn}
+            onChange={(e) => setNewReservation({ ...newReservation, timeIn: e.target.value })}
+            fullWidth
+          />
+          <TextField
+            label="Time Out"
+            type="time"
+            value={newReservation.timeOut}
+            onChange={(e) => setNewReservation({ ...newReservation, timeOut: e.target.value })}
+            fullWidth
+          />
+          <Button variant="contained" color="primary" onClick={handleMakeReservation}>
+            Submit Reservation
+          </Button>
+        </ReservationFormCard>
+
+        <ReservationDetailsCard>
+          <Typography variant="h6" fontWeight="bold" marginBottom="10px">Reservation Details</Typography>
+          <ReservationTable>
+            <TableHead>
+              <TableRow>
+                <TableCell>RESOURCE</TableCell>
+                <TableCell>NAME</TableCell>
+                <TableCell>DATE</TableCell>
+                <TableCell>TIME IN</TableCell>
+                <TableCell>TIME OUT</TableCell>
+                <TableCell>PAYMENT STATUS</TableCell>
+                <TableCell>CANCEL</TableCell>
+                <TableCell>STATUS</TableCell>
+                <TableCell>PENALTY</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </ReservationTable>
-      </ReservationDetailsCard>
-    </PageContainer>
+            </TableHead>
+            <TableBody>
+              {reservationData.map((reservation, index) => (
+                <TableRow key={index}>
+                  <TableCell>{reservation.resource}</TableCell>
+                  <TableCell>{reservation.name}</TableCell>
+                  <TableCell>{reservation.date}</TableCell>
+                  <TableCell>{reservation.timeIn}</TableCell>
+                  <TableCell>{reservation.timeOut}</TableCell>
+                  <TableCell>{reservation.paymentStatus}</TableCell>
+                  <TableCell>{reservation.status}</TableCell>
+                  <TableCell>{reservation.penalty}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </ReservationTable>
+        </ReservationDetailsCard>
+      </PageContainer>
+    </>
   );
 }
 
