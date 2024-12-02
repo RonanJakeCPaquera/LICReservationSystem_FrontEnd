@@ -18,7 +18,7 @@ const MainContainer = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'center',
   minHeight: '100vh',  // Ensures it takes full viewport height
-  backgroundColor: '#f4f4f4', // Light gray background (can change if needed)
+  backgroundColor: '#f2dbb2', // Light gray background (can change if needed)
   width: '100%',
   position: 'absolute',  // Use absolute positioning to center it
   top: '50%',  // Position from the top of the page

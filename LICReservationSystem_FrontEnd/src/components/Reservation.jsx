@@ -51,6 +51,17 @@ const ContentWrapper = styled(Box)(() => ({
   justifyContent: 'space-between',
 }));
 
+const CardTitle = styled(Typography)(() => ({
+  fontSize: '1.25rem',
+  fontWeight: 'bold',
+  marginBottom: '10px',
+  color: '#fff', // Adjust text color to contrast with maroon
+  backgroundColor: '#800000', // Maroon background
+  padding: '10px', // Add padding for better readability
+  borderBottom: '1px solid #333', // Line below the title
+  borderRadius: '4px', // Optional: Slight rounding for better appearance
+}));
+
 const ProfileCard = styled(Card)(() => ({
   width: '45%',
   padding: '20px',
@@ -134,7 +145,7 @@ function Profile() {
 
   return (
     <ProfileCard>
-      <Typography variant="h6" fontWeight="bold">{isEditing ? 'EDIT PROFILE' : 'Student Profile'}</Typography>
+      <CardTitle variant="h6" fontWeight="bold">{isEditing ? 'EDIT PROFILE' : 'Student Profile'}</CardTitle>
       {isEditing ? (
         <>
           <TextField
@@ -233,7 +244,7 @@ function Reservation() {
         <ContentWrapper>
           <Profile />
           <AboutCard>
-            <Typography variant="h6" fontWeight="bold">About the Page</Typography>
+            <CardTitle variant="h6" fontWeight="bold">About the Page</CardTitle>
             <Typography>
               Welcome to the Student Dashboard! Here, you can manage your profile and
               view your reservations. Ensure that all your details are updated for
@@ -243,7 +254,7 @@ function Reservation() {
         </ContentWrapper>
 
         <ReservationFormCard>
-          <Typography variant="h6" fontWeight="bold" marginBottom="10px">Make a New Reservation</Typography>
+          <CardTitle variant="h6" fontWeight="bold" marginBottom="10px">Make a New Reservation</CardTitle>
 
           {/* Name Field */}
           <TextField
@@ -294,7 +305,7 @@ function Reservation() {
         </ReservationFormCard>
 
         <ReservationDetailsCard>
-          <Typography variant="h6" fontWeight="bold" marginBottom="10px">Reservation Details</Typography>
+          <CardTitle variant="h6" fontWeight="bold" marginBottom="10px">Reservation Details</CardTitle>
           <ReservationTable>
             <TableHead>
               <TableRow>
