@@ -128,7 +128,7 @@ function LoginPage() {
           variant="contained" 
           color="primary" 
           fullWidth
-          onClick={() => navigate('/reservation')} 
+          onClick={() => navigate('/admin-page')} 
           sx={{
             background: 'maroon',
             fontSize: 15,
