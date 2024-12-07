@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { styled } from '@mui/system';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const HeaderContainer = styled(Box)(() => ({
   display: 'flex',
@@ -41,7 +42,9 @@ function Header({ name, onLogout }) {
     <HeaderContainer>
       {/* Left Section with Logo and Text */}
       <LeftSection>
-        <Logo src="cit-logo.png" alt="CIT University Logo" /> {/* Replace with the actual logo path */}
+        <Link to="/" style={{ textDecoration: 'none' }}> {/* Make the logo clickable */}
+          <Logo src="cit-logo.png" alt="CIT University Logo" /> {/* Replace with the actual logo path */}
+        </Link>
         <HeaderText>
           <Typography variant="h6" style={{ fontWeight: 'bold', lineHeight: 1 }}>
             CEBU INSTITUTE OF TECHNOLOGY UNIVERSITY

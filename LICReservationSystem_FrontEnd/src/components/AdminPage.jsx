@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, Card, CssBaseline, Typography, Stack } from "@mui/material";
+import { Box, Button, Card, CssBaseline, Typography, Stack, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
 import Header from "./Header";
@@ -65,6 +65,8 @@ const TableHeader = styled(Typography)(({ theme }) => ({
 
 const AdminPage = () => {
   const [activeTab, setActiveTab] = useState("BOOKINGS");
+  const [open, setOpen] = useState(false); 
+  const [selectedRecord, setSelectedRecord] = useState(null); 
 
   const data = {
     BOOKINGS: [
@@ -89,6 +91,22 @@ const AdminPage = () => {
 
   const handlePanelClick = (tab) => {
     setActiveTab(tab);
+  };
+
+  const handleDeleteClick = (record) => {
+    setSelectedRecord(record);
+    setOpen(true); // Open the dialog
+  };
+
+  const handleConfirmDelete = () => {
+    console.log("Record deleted:", selectedRecord);
+    setOpen(false); 
+    setSelectedRecord(null); 
+  };
+
+  const handleCancel = () => {
+    setOpen(false);
+    setSelectedRecord(null); 
   };
 
   return (
@@ -247,6 +265,7 @@ const AdminPage = () => {
                             <FaEdit />
                         </Button>
                         <Button
+                            onClick={() => handleDeleteClick(item)}
                             size="small"
                             variant="outlined"
                             color="error"
@@ -260,6 +279,22 @@ const AdminPage = () => {
                         >
                             <FaTrash />
                         </Button>
+                        <Dialog open={open} onClose={handleCancel}>
+                        <DialogTitle>Confirm Delete</DialogTitle>
+                        <DialogContent>
+                          <DialogContentText>
+                            Are you sure you want to delete this record?
+                          </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleCancel} color="primary">
+                            Cancel
+                          </Button>
+                          <Button onClick={handleConfirmDelete} color="error">
+                            Delete
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
                     </td>
                   </tr>
                 ))}

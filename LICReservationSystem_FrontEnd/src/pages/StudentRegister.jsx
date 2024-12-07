@@ -83,32 +83,43 @@ export default function StudentRegister() {
   };
 
   const validateForm = () => {
-    const requiredFields = [
-      'studentId',
-      'firstName',
-      'lastName',
-      'department',
-      'course',
-      'yearLevel',
-      'birthdate',
-      'contactNumber',
-      'address',
-      'username',
-      'email',
-      'password',
-      'confirmPassword',
-    ];
-    const newErrors = {};
-    requiredFields.forEach((field) => {
-      if (!formData[field]) {
-        newErrors[field] = 'This field is required.';
-      }
-    });
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords must match.';
+  const requiredFields = [
+    'studentId',
+    'firstName',
+    'lastName',
+    'department',
+    'course',
+    'yearLevel',
+    'birthdate',
+    'contactNumber',
+    'address',
+    'username',
+    'email',
+    'password',
+    'confirmPassword',
+  ];
+  
+  const newErrors = {};
+  
+  // Check required fields
+  requiredFields.forEach((field) => {
+    if (!formData[field]) {
+      newErrors[field] = 'This field is required.';
     }
-    return newErrors;
-  };
+  });
+
+  // Password validation
+  const passwordRegex = /^(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+  if (!passwordRegex.test(formData.password)) {
+    newErrors.password = 'Password must be at least 8 characters long and include one special character.';
+  }
+
+  if (formData.password !== formData.confirmPassword) {
+    newErrors.confirmPassword = 'Passwords must match.';
+  }
+
+  return newErrors;
+};
 
   return (
     <>
