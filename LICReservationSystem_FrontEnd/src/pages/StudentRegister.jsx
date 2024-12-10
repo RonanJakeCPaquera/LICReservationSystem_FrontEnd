@@ -5,15 +5,19 @@ import { useNavigate } from 'react-router-dom';  // Import useNavigate hook
 
 const RegistrationContainer = styled(Stack)(({ theme }) => ({
   position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  top: 0,
+  left: 0,
+  width: '100vw',
+  height: '100vh',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   padding: theme.spacing(2),
+  backgroundColor: '#f2dbb2',
+  overflow: 'auto',
   [theme.breakpoints.up('sm')]: {
     padding: theme.spacing(4),
+    height: 'auto', // Allows flexibility for large content on bigger screens
   },
 }));
 
@@ -27,7 +31,8 @@ const StyledCard = styled(Card)(({ theme }) => ({
   gap: theme.spacing(2),
   margin: 'auto',
   boxShadow: theme.shadows[4],
-  marginTop: theme.spacing(60), // Add marginTop to create space above the card
+  minHeight: '50vh',  // Allow the card to grow with the content
+  overflow: 'auto',   // Allow the card to be scrollable if needed
 }));
 
 const SectionCard = styled(Card)(({ theme }) => ({

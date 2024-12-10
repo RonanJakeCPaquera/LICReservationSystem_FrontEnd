@@ -28,31 +28,14 @@ const Card = styled(MuiCard)(({ theme }) => ({
 }));
 
 const SignInContainer = styled(Stack)(({ theme }) => ({
-  position: 'absolute',
-  top: '50%', // Vertically center
-  left: '50%', // Horizontally center
-  transform: 'translate(-50%, -50%)', // Adjust for exact centering
+  width: '100vw',  // Full viewport width
+  height: '100vh', // Full viewport height
   display: 'flex',
-  justifyContent: 'center', // Center content vertically in the container
-  alignItems: 'center', // Center content horizontally
+  justifyContent: 'center', // Center content vertically
+  alignItems: 'center',     // Center content horizontally
   padding: theme.spacing(2),
-  [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(4),
-  },
-  '&::before': {
-    content: '""',
-    display: 'block',
-    position: 'absolute',
-    zIndex: -1,
-    inset: 0,
-    backgroundImage:
-      'radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))',
-    backgroundRepeat: 'no-repeat',
-    ...theme.applyStyles('dark', {
-      backgroundImage:
-        'radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))',
-    }),
-  },
+  position: 'relative',
+  backgroundColor: '#f2dbb2',
 }));
 
 export default function SignIn() {
