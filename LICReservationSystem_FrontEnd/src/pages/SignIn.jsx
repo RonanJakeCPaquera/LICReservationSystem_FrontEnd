@@ -136,7 +136,6 @@ export default function SignIn() {
                 height: '60px',
                 fontSize: '1.2rem',
                 background: 'maroon',
-                fontSize: 20,
                 fontWeight: 'bold',
                 color: 'gold',
              }}
@@ -153,7 +152,6 @@ export default function SignIn() {
                 height: '60px',
                 fontSize: '1.2rem',
                 background: 'maroon',
-                fontSize: 20,
                 fontWeight: 'bold',
                 color: 'gold',
              }}
