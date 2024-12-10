@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { Box, Button, Card, CssBaseline, Typography, Stack, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import EditIcon from "@mui/icons-material/Edit";  // MUI Edit icon
+import DeleteIcon from "@mui/icons-material/Delete";  // MUI Delete icon
+import VisibilityIcon from "@mui/icons-material/Visibility";  // MUI Visibility icon
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";  // MUI Calendar icon
+import SettingsIcon from "@mui/icons-material/Settings";  // MUI Settings icon
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";  // MUI Dollar icon
+import GroupIcon from "@mui/icons-material/Group";  // MUI Group icon
+import LaptopMacIcon from "@mui/icons-material/LaptopMac";  // MUI Laptop icon
 import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
 import Header from "./Header";
 
@@ -109,6 +117,23 @@ const AdminPage = () => {
     setSelectedRecord(null); 
   };
 
+  const getTabIcon = (tab) => {
+    switch(tab) {
+      case "BOOKINGS":
+        return <CalendarTodayIcon />;
+      case "EQUIPMENT":
+        return <SettingsIcon />;
+      case "PAYMENTS":
+        return <AttachMoneyIcon />;
+      case "RESERVATIONS":
+        return <LaptopMacIcon />;
+      case "STUDENTS":
+        return <GroupIcon />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <CssBaseline />
@@ -128,14 +153,17 @@ const AdminPage = () => {
         >
           {["BOOKINGS", "EQUIPMENT", "PAYMENTS", "RESERVATIONS", "STUDENTS"].map((tab) => (
             <OverviewCard
-              key={tab}
-              active={activeTab === tab}
-              onClick={() => handlePanelClick(tab)}
-            >
-              <Typography variant="h6" style={{ fontWeight: "bold" }}>
+            key={tab}
+            active={activeTab === tab}
+            onClick={() => handlePanelClick(tab)}
+          >
+            <Stack direction="column" alignItems="center" justifyContent="center">
+              {getTabIcon(tab)}
+              <Typography variant="h6" style={{ fontWeight: "bold", marginTop: "8px" }}>
                 {tab}
-            </Typography>
-            </OverviewCard>
+              </Typography>
+            </Stack>
+          </OverviewCard>
           ))}
         </div>
 
