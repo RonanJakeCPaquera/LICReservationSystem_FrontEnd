@@ -148,7 +148,6 @@ const AdminPage = () => {
             flexWrap: "wrap",
             width: "100%",
             marginBottom: "30px",
-            justifyContent: "center", // Center cards horizontally
           }}
         >
           {["BOOKINGS", "EQUIPMENT", "PAYMENTS", "RESERVATIONS", "STUDENTS"].map((tab) => (
@@ -315,10 +314,20 @@ const AdminPage = () => {
                           </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                          <Button onClick={handleCancel} color="primary">
+                          <Button 
+                          onClick={handleCancel} 
+                          color="primary"
+                          sx={{
+                            color: 'maroon',
+                          }}>
                             Cancel
                           </Button>
-                          <Button onClick={handleConfirmDelete} color="error">
+                          <Button 
+                          onClick={handleConfirmDelete} 
+                          color="error"
+                          sx={{
+                            color: 'maroon'
+                          }}>
                             Delete
                           </Button>
                         </DialogActions>
