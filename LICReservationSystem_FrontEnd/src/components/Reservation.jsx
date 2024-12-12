@@ -15,6 +15,7 @@ import {
   InputLabel, 
   FormControl 
 } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { styled, createGlobalStyle } from 'styled-components';
 import Header from './Header'; // Import your Header component
 
@@ -128,24 +129,38 @@ const ReservationTable = styled(Table)(() => ({
   minWidth: '100%',
 }));
 
+
 // Profile Component
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [contactNumber, setContactNumber] = useState('09123456789');
   const [address, setAddress] = useState('1234 Elm Street');
+  const [open, setOpen] = useState(false);  // Add this line
 
   const handleEditProfile = () => {
     setIsEditing(true);
   };
 
   const handleSaveChanges = () => {
-    setIsEditing(false);
+    setOpen(true);  // Open dialog when Save Changes is clicked
+  };
+
+  const handleConfirmSave = () => {
+    setIsEditing(false);  // Disable editing
+    setOpen(false);       // Close dialog
     console.log('Changes saved:', { contactNumber, address });
+  };
+
+  const handleCancelSave = () => {
+    setOpen(false);  // Close dialog without saving
   };
 
   return (
     <ProfileCard>
-      <CardTitle variant="h6" fontWeight="bold">{isEditing ? 'EDIT PROFILE' : 'Student Profile'}</CardTitle>
+      <CardTitle variant="h6" fontWeight="bold">
+        {isEditing ? 'EDIT PROFILE' : 'Student Profile'}
+      </CardTitle>
+
       {isEditing ? (
         <>
           <TextField
@@ -161,7 +176,11 @@ function Profile() {
             onChange={(e) => setAddress(e.target.value)}
           />
           <Box display="flex" justifyContent="space-between" gap="10px">
-            <Button variant="contained" color="primary" onClick={handleSaveChanges}>
+            <Button
+              variant="contained"
+              sx={{ background: 'maroon', color: 'white' }}
+              onClick={handleSaveChanges}
+            >
               Save Changes
             </Button>
           </Box>
@@ -175,12 +194,39 @@ function Profile() {
           <TextField label="Contact Number" value={contactNumber} fullWidth disabled />
           <TextField label="Address" value={address} fullWidth disabled />
           <Box display="flex" justifyContent="space-between" gap="10px">
-            <Button variant="outlined" color="primary" onClick={handleEditProfile}>
+            <Button
+              variant="outlined"
+              sx={{ borderColor: 'maroon', color: 'maroon' }}
+              onClick={handleEditProfile}
+            >
               Edit Profile
             </Button>
           </Box>
         </>
       )}
+
+      {/* Confirmation Dialog */}
+      <Dialog open={open} onClose={handleCancelSave}>
+        <DialogTitle>Confirm Action</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to save the changes?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button 
+          onClick={handleCancelSave} 
+          color="secondary"
+          sx={{
+            color: 'maroon',
+          }}>
+            Cancel
+          </Button>
+          <Button onClick={handleConfirmSave} sx={{ color: 'maroon' }}>
+            Yes, Save
+          </Button>
+        </DialogActions>
+      </Dialog>
     </ProfileCard>
   );
 }
@@ -262,6 +308,7 @@ function Reservation() {
             value={newReservation.name}
             onChange={(e) => setNewReservation({ ...newReservation, name: e.target.value })}
             fullWidth
+            margin="normal"
           />
 
           {/* Resource Dropdown */}
@@ -279,11 +326,12 @@ function Reservation() {
 
           {/* Date Field */}
           <TextField
-            label="Date"
+            label=""
             type="date"
             value={newReservation.date}
             onChange={(e) => setNewReservation({ ...newReservation, date: e.target.value })}
             fullWidth
+            margin="normal"
           />
           <TextField
             label="Time In"
@@ -291,6 +339,7 @@ function Reservation() {
             value={newReservation.timeIn}
             onChange={(e) => setNewReservation({ ...newReservation, timeIn: e.target.value })}
             fullWidth
+            margin="normal"
           />
           <TextField
             label="Time Out"
@@ -298,10 +347,15 @@ function Reservation() {
             value={newReservation.timeOut}
             onChange={(e) => setNewReservation({ ...newReservation, timeOut: e.target.value })}
             fullWidth
+            margin="normal"
           />
-          <Button variant="contained" color="primary" onClick={handleMakeReservation}>
-            Submit Reservation
-          </Button>
+         <Button 
+          variant="contained" 
+          sx={{ backgroundColor: '#800000', '&:hover': { backgroundColor: '#600000' } }} 
+          onClick={handleMakeReservation}
+        >
+          Submit Reservation
+        </Button>
         </ReservationFormCard>
 
         <ReservationDetailsCard>
